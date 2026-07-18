@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-body text-brown-dark bg-cream antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  @apply font-display;
+}
+
+.script-text {
+  @apply font-script;
+  overflow-wrap: anywhere;
+}
+
+.section-title {
+  @apply font-display text-3xl sm:text-4xl md:text-5xl text-brown-dark font-semibold;
+  overflow-wrap: anywhere;
+}
+
+.section-eyebrow {
+  @apply inline-block text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-gold-dark mb-3;
+}
+
+.container-page {
+  @apply max-w-6xl mx-auto px-5 sm:px-8;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-6 py-3.5 rounded-full shadow-soft transition-transform hover:scale-[1.03] active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 border-2 border-brown text-brown font-semibold px-6 py-3.5 rounded-full transition-colors hover:bg-brown hover:text-cream;
+}
+
+.card {
+  @apply bg-white/80 rounded-2xl shadow-card border border-brown/5;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #F3E4CC; }
+::-webkit-scrollbar-thumb { background: #C9971F; border-radius: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
