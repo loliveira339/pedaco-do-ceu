@@ -33,16 +33,18 @@ h1, h2, h3, h4 {
   @apply max-w-6xl mx-auto px-5 sm:px-8;
 }
 
-.btn-primary {
-  @apply inline-flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-6 py-3.5 rounded-full shadow-soft transition-transform hover:scale-[1.03] active:scale-[0.98];
-}
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-whatsapp text-white font-semibold px-6 py-3.5 rounded-full shadow-soft transition-transform hover:scale-[1.03] active:scale-[0.98];
+  }
 
-.btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 border-2 border-brown text-brown font-semibold px-6 py-3.5 rounded-full transition-colors hover:bg-brown hover:text-cream;
-}
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-brown text-brown font-semibold px-6 py-3.5 rounded-full transition-colors hover:bg-brown hover:text-cream;
+  }
 
-.card {
-  @apply bg-white/80 rounded-2xl shadow-card border border-brown/5;
+  .card {
+    @apply bg-white/80 rounded-2xl shadow-card border border-brown/5;
+  }
 }
 
 ::-webkit-scrollbar { width: 10px; }

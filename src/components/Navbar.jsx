@@ -56,7 +56,7 @@ export default function Navbar() {
             href={whatsappLink('Olá! Vim pelo site e gostaria de saber mais sobre os produtos 🍰')}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex btn-primary !py-2.5 !px-5 text-sm"
+            className="hidden lg:inline-flex btn-primary !py-2.5 !px-5 text-sm"
           >
             Pedir no WhatsApp
           </a>
