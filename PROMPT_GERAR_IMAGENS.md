@@ -71,3 +71,48 @@ O que fazer:
 Não precisa alterar mais nada no restante do projeto — produtos, preços,
 descrições e os inserts na galeria já estão todos cadastrados em
 `seedFallback.js` e `supabase/schema.sql`, só falta gerar essas 4 fotos.
+
+---
+
+**Atualização 3**: adicionei mais uma entrada no script, desta vez para o
+**banner principal do Hero** (o card grande que aparece na abertura do
+site, ao lado do título "Um pedaço do céu em cada mordida").
+
+Contexto:
+- O banner atual é `public/images/banner-instagram.jpeg` — um print de um
+  post do Instagram, com o texto "@pedacodoceudelicias", telefone e outros
+  textos já embutidos na própria imagem. Isso é ruim: duplica informação
+  que já está em HTML no site, e qualquer atualização de telefone/preço
+  exigiria gerar uma imagem nova. Vamos substituir por uma foto de comida
+  limpa, sem nenhum texto, no mesmo estilo visual das fotos de produto já
+  geradas.
+- Adicionei a entrada `banner-hero.jpg` no array `PRODUTOS` do script
+  `scripts/gerar-imagens-produtos.mjs`. Diferente das fotos de produto
+  (que são quadradas 1:1), essa é **paisagem (4:3, 1200x900)** porque
+  precisa preencher um card retangular largo no Hero — por isso adicionei
+  suporte a `aspectRatio`/`largura`/`altura` por item no script (as fotos
+  de produto continuam default 1:1 1000x1000, sem precisar mudar nada
+  nelas).
+- `src/components/sections/Hero.jsx` já foi atualizado para referenciar
+  `/images/banner-hero.jpg` no lugar do banner antigo. O arquivo antigo
+  `banner-instagram.jpeg` **não foi apagado** (ainda é usado como
+  `og:image` em `index.html` para compartilhamento em redes sociais — pode
+  deixar como está, ou trocar depois se quiser).
+
+O que fazer:
+1. Rode `node scripts/gerar-imagens-produtos.mjs`. Como só falta o
+   `banner-hero.jpg` (as outras já existem), ele vai gerar só essa.
+2. Abra `public/images/banner-hero.jpg` e confirme visualmente que:
+   - Não tem texto, logo, marca d'água ou mãos na imagem.
+   - Mostra claramente uma torta salgada (fatiada, mostrando o recheio) e
+     um pudim (desenformado, com calda), como uma foto de mesa bonita —
+     não uma montagem tipo post de rede social.
+   - A composição é mais larga que alta (paisagem), não quadrada.
+3. Rode `npm run dev` e confira a seção Hero (topo da home): o banner deve
+   preencher o card arredondado à direita do título sem esticar nem
+   cortar de forma estranha.
+4. Se o resultado não ficar bom (por exemplo enquadramento ruim para o
+   card retangular), ajuste o prompt da entrada `banner-hero.jpg` no
+   script e rode de novo com
+   `node scripts/gerar-imagens-produtos.mjs --force`.
+5. Me dê um resumo curto do resultado.

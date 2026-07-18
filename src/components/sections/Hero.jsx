@@ -56,8 +56,8 @@ export default function Hero() {
         >
           <div className="rounded-[2rem] overflow-hidden shadow-card border-4 border-white">
             <img
-              src="/images/banner-instagram.jpeg"
-              alt="Tortas e pudins artesanais Pedaço do Céu"
+              src="/images/banner-hero.jpg"
+              alt="Torta salgada e pudim artesanais Pedaço do Céu"
               className="w-full h-[320px] sm:h-[420px] object-cover"
               loading="eager"
             />

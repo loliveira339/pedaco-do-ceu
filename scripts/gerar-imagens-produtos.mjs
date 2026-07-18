@@ -119,6 +119,26 @@ const PRODUTOS = [
       `on a white plate, caramel sauce pooling around it, garnished with a fresh orange slice on ` +
       `top, ${STYLE_SUFFIX}`,
   },
+  {
+    // Banner principal do Hero (topo do site) — substitui o antigo
+    // banner-instagram.jpeg, que era um print de post do Instagram com
+    // texto/telefone embutidos na imagem (ruim: informação desatualizável
+    // e duplicada com o texto do próprio site). Este é landscape (não
+    // quadrado) para caber no card do Hero, e sem nenhum texto/logo — o
+    // nome, subtítulo e CTA já existem em HTML por cima da imagem.
+    arquivo: 'banner-hero.jpg',
+    aspectRatio: '4:3',
+    largura: 1200,
+    altura: 900,
+    prompt:
+      'Eye-level styled food photography flat-lay for a Brazilian home bakery hero banner: a ' +
+      'golden baked savory pie (torta salgada) with one slice cut and pulled out revealing a ' +
+      'creamy shredded chicken filling, next to a glossy unmolded Brazilian pudim (flan) with ' +
+      'caramel sauce dripping down, both arranged on a light wood table with a linen cloth, ' +
+      'soft natural window light from the side, warm cream and gold tones, a few loose caramel ' +
+      'drips and a sprig of mint as garnish, shallow depth of field, appetizing, high detail, ' +
+      'rustic-elegant bakery styling, no text, no logos, no watermark, no hands, landscape 4:3 composition',
+  },
 ];
 
 function lerApiKey() {
@@ -136,7 +156,7 @@ function lerApiKey() {
   return null;
 }
 
-async function gerarImagem(apiKey, prompt) {
+async function gerarImagem(apiKey, prompt, aspectRatio = '1:1') {
   const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
     method: 'POST',
     headers: {
@@ -149,7 +169,7 @@ async function gerarImagem(apiKey, prompt) {
       response_format: {
         type: 'image',
         mime_type: 'image/jpeg',
-        aspect_ratio: '1:1',
+        aspect_ratio: aspectRatio,
         image_size: '1K',
       },
     }),
@@ -198,8 +218,8 @@ const LARGURA_WEB_PX = 1000;
 // A API devolve PNG grande (~1.5-2MB) mesmo pedindo jpeg — convertemos para
 // JPEG real, redimensionamos para uso web e reduzimos qualidade até caber
 // numa faixa de tamanho razoável para carregar rápido no site.
-async function comprimirParaJpeg(bufferOriginal) {
-  const redimensionado = sharp(bufferOriginal).resize(LARGURA_WEB_PX, LARGURA_WEB_PX, { fit: 'cover' });
+async function comprimirParaJpeg(bufferOriginal, largura = LARGURA_WEB_PX, altura = LARGURA_WEB_PX) {
+  const redimensionado = sharp(bufferOriginal).resize(largura, altura, { fit: 'cover' });
 
   for (const qualidade of [80, 70, 60, 50, 40]) {
     const buffer = await redimensionado.clone().jpeg({ quality: qualidade, mozjpeg: true }).toBuffer();
@@ -232,8 +252,8 @@ async function main() {
 
     process.stdout.write(`Gerando ${produto.arquivo}... `);
     try {
-      const bufferBruto = await gerarImagem(apiKey, produto.prompt);
-      const buffer = await comprimirParaJpeg(bufferBruto);
+      const bufferBruto = await gerarImagem(apiKey, produto.prompt, produto.aspectRatio || '1:1');
+      const buffer = await comprimirParaJpeg(bufferBruto, produto.largura, produto.altura);
       fs.writeFileSync(destino, buffer);
       console.log(`ok (${(buffer.length / 1024).toFixed(0)} KB)`);
     } catch (err) {
