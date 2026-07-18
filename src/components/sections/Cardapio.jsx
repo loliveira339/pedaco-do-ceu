@@ -18,7 +18,10 @@ export default function Cardapio() {
         supabase.from('categorias').select('*').order('ordem'),
         supabase.from('produtos').select('*').eq('ativo', true).order('ordem'),
       ]);
-      if (cats?.length) setCategorias(cats);
+      if (cats?.length) {
+        setCategorias(cats);
+        setAtiva(cats[0].id);
+      }
       if (prods?.length) setProdutos(prods);
       setLoading(false);
     })();
