@@ -1,5 +1,6 @@
 import { supabaseAdmin } from './_lib/supabaseAdmin.js';
 import { cotarFrete } from './_lib/frete.js';
+import { criarCheckoutPagBank } from './_lib/pagbank.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -92,9 +93,19 @@ export default async function handler(req, res) {
     const { error: erroItens } = await supabaseAdmin.from('pedido_itens').insert(itensParaInserir);
     if (erroItens) throw erroItens;
 
-    // TODO (Fase 3): chamar o checkout PagBank aqui e retornar checkout_url
-    // pro client redirecionar. Por enquanto retorna sucesso direto.
-    return res.status(200).json({ pedido_id: pedido.id, valor_total: valorTotal });
+    const { checkoutUrl, checkoutId, referenceId } = await criarCheckoutPagBank({
+      pedidoId: pedido.id,
+      clienteNome: cliente.nome,
+      clienteEmail: cliente.email,
+      valorTotal,
+    });
+
+    await supabaseAdmin
+      .from('pedidos')
+      .update({ pagbank_checkout_id: checkoutId, pagbank_reference_id: referenceId })
+      .eq('id', pedido.id);
+
+    return res.status(200).json({ pedido_id: pedido.id, valor_total: valorTotal, checkout_url: checkoutUrl });
   } catch (err) {
     const status = err.status || 500;
     if (status === 500) console.error('Erro ao criar pedido:', err);
