@@ -10,6 +10,7 @@ import CategoriasPage from './pages/admin/CategoriasPage';
 import IngredientesPage from './pages/admin/IngredientesPage';
 import GaleriaPage from './pages/admin/GaleriaPage';
 import CalculadoraPage from './pages/admin/CalculadoraPage';
+import PedidosPage from './pages/admin/PedidosPage';
 import AdminLayout from './components/admin/AdminLayout';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 
@@ -30,6 +31,7 @@ export default function App() {
         }
       >
         <Route index element={<DashboardPage />} />
+        <Route path="pedidos" element={<PedidosPage />} />
         <Route path="produtos" element={<ProdutosPage />} />
         <Route path="categorias" element={<CategoriasPage />} />
         <Route path="ingredientes" element={<IngredientesPage />} />

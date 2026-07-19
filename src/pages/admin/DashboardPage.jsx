@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Cake, Tags, Wheat, Image, Calculator } from 'lucide-react';
+import { Cake, Tags, Wheat, Image, Calculator, Package } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 
 const CARDS = [
+  { key: 'pedidos', label: 'Pedidos', icon: Package, to: '/admin/pedidos', color: 'bg-whatsapp/15 text-whatsapp' },
   { key: 'produtos', label: 'Produtos', icon: Cake, to: '/admin/produtos', color: 'bg-savory/10 text-savory' },
   { key: 'categorias', label: 'Categorias', icon: Tags, to: '/admin/categorias', color: 'bg-skyblue/20 text-brown-dark' },
   { key: 'ingredientes', label: 'Ingredientes', icon: Wheat, to: '/admin/ingredientes', color: 'bg-gold/15 text-gold-dark' },
@@ -11,12 +12,12 @@ const CARDS = [
 ];
 
 export default function DashboardPage() {
-  const [counts, setCounts] = useState({ produtos: null, categorias: null, ingredientes: null, galeria: null });
+  const [counts, setCounts] = useState({ pedidos: null, produtos: null, categorias: null, ingredientes: null, galeria: null });
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
     (async () => {
-      const tables = { produtos: 'produtos', categorias: 'categorias', ingredientes: 'ingredientes', galeria: 'galeria' };
+      const tables = { pedidos: 'pedidos', produtos: 'produtos', categorias: 'categorias', ingredientes: 'ingredientes', galeria: 'galeria' };
       const entries = await Promise.all(
         Object.entries(tables).map(async ([key, table]) => {
           const { count } = await supabase.from(table).select('*', { count: 'exact', head: true });

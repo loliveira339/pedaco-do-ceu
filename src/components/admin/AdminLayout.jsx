@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Cake, Tags, Wheat, Image, Calculator, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Cake, Tags, Wheat, Image, Calculator, LogOut, Menu, X, Package } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const NAV = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/admin/pedidos', label: 'Pedidos', icon: Package },
   { to: '/admin/produtos', label: 'Produtos', icon: Cake },
   { to: '/admin/categorias', label: 'Categorias', icon: Tags },
   { to: '/admin/ingredientes', label: 'Ingredientes', icon: Wheat },
