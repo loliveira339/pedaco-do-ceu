@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { ShoppingCart } from 'lucide-react';
+import toast from 'react-hot-toast';
 import { supabase, isSupabaseConfigured, whatsappLink } from '../../lib/supabaseClient';
 import { categoriasFallback, produtosFallback } from '../../data/seedFallback';
 import { formatBRL } from '../../utils/precificacao';
+import { useCarrinho } from '../../context/CarrinhoContext';
 import Reveal from '../Reveal';
 
 export default function Cardapio() {
@@ -10,6 +13,7 @@ export default function Cardapio() {
   const [produtos, setProdutos] = useState(produtosFallback);
   const [ativa, setAtiva] = useState(null);
   const [loading, setLoading] = useState(isSupabaseConfigured);
+  const { adicionar } = useCarrinho();
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
@@ -78,16 +82,28 @@ export default function Cardapio() {
                       )}
                     </div>
                     <p className="mt-2 text-sm text-brown/70 leading-relaxed flex-1">{p.descricao}</p>
-                    <div className="mt-4 flex items-center justify-between">
+                    <div className="mt-4 flex items-center justify-between gap-2">
                       <span className="font-display text-xl font-bold text-gold-dark">{formatBRL(p.preco)}</span>
-                      <a
-                        href={whatsappLink(`Olá! Quero pedir: ${p.nome} 🍰`)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-semibold text-whatsapp hover:underline"
-                      >
-                        Pedir →
-                      </a>
+                      <div className="flex items-center gap-3">
+                        <a
+                          href={whatsappLink(`Olá! Quero pedir: ${p.nome} 🍰`)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-semibold text-whatsapp hover:underline"
+                        >
+                          Pedir →
+                        </a>
+                        <button
+                          onClick={() => {
+                            adicionar(p);
+                            toast.success(`${p.nome} adicionado ao carrinho`);
+                          }}
+                          aria-label={`Adicionar ${p.nome} ao carrinho`}
+                          className="shrink-0 w-9 h-9 rounded-full bg-brown text-cream flex items-center justify-center hover:bg-brown-dark transition-colors"
+                        >
+                          <ShoppingCart size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

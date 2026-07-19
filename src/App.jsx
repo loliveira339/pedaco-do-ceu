@@ -1,6 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import PedidoPage from './pages/PedidoPage';
+import PedidoSucessoPage from './pages/PedidoSucessoPage';
 import LoginPage from './pages/admin/LoginPage';
 import DashboardPage from './pages/admin/DashboardPage';
 import ProdutosPage from './pages/admin/ProdutosPage';
@@ -15,6 +17,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/pedido" element={<PedidoPage />} />
+      <Route path="/pedido/sucesso" element={<PedidoSucessoPage />} />
 
       <Route path="/admin/login" element={<LoginPage />} />
       <Route
