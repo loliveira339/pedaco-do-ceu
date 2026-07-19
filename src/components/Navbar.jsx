@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 import { whatsappLink } from '../lib/supabaseClient';
+import { useCarrinho } from '../context/CarrinhoContext';
 
 const LINKS = [
   { href: '#historia', label: 'Nossa História' },
@@ -15,6 +17,7 @@ const LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { totalItens } = useCarrinho();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -52,6 +55,18 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
+          <Link
+            to="/pedido"
+            aria-label={`Carrinho${totalItens > 0 ? `, ${totalItens} ${totalItens === 1 ? 'item' : 'itens'}` : ''}`}
+            className="relative p-2 text-brown-dark hover:text-gold-dark transition-colors"
+          >
+            <ShoppingBag size={24} />
+            {totalItens > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-whatsapp text-white text-[10px] font-bold">
+                {totalItens}
+              </span>
+            )}
+          </Link>
           <a
             href={whatsappLink('Olá! Vim pelo site e gostaria de saber mais sobre os produtos 🍰')}
             target="_blank"
