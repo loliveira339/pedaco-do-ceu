@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import StickyMobileCTA from '../components/StickyMobileCTA';
+import InstallPrompt from '../components/InstallPrompt';
 import Hero from '../components/sections/Hero';
 import NossaHistoria from '../components/sections/NossaHistoria';
 import Cardapio from '../components/sections/Cardapio';
@@ -29,6 +30,7 @@ export default function HomePage() {
       <Footer />
       <WhatsAppButton />
       <StickyMobileCTA />
+      <InstallPrompt />
     </div>
   );
 }
