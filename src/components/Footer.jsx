@@ -30,8 +30,8 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Instagram size={16} className="text-gold shrink-0" />
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
-                @pedacodoceu
+              <a href="https://instagram.com/pedacodoceudelicias" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
+                @pedacodoceudelicias
               </a>
             </li>
           </ul>

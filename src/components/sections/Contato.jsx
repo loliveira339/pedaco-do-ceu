@@ -39,8 +39,8 @@ export default function Contato() {
           <a href={whatsappLink('Olá!')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
             <Phone size={16} /> {phoneDisplay}
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
-            <Instagram size={16} /> @pedacodoceu
+          <a href="https://instagram.com/pedacodoceudelicias" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
+            <Instagram size={16} /> @pedacodoceudelicias
           </a>
         </Reveal>
       </div>
