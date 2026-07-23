@@ -120,6 +120,15 @@ const PRODUTOS = [
       `top, ${STYLE_SUFFIX}`,
   },
   {
+    arquivo: 'torta-marinheiro.jpg',
+    prompt:
+      `Golden baked Brazilian savory pie (torta salgada) filled with canned sardine fish (not tuna, ` +
+      `not chicken) flaked apart, mixed with a generous reddish-orange tomato sauce base (molho de ` +
+      `tomate) so the whole filling looks red/orange and saucy, studded with green peas, yellow corn ` +
+      `kernels and shredded carrot, with creamy melted requeijão, one slice cut and pulled slightly ` +
+      `out revealing the vivid reddish-orange saucy filling, ${STYLE_SUFFIX}`,
+  },
+  {
     // Banner principal do Hero (topo do site) — substitui o antigo
     // banner-instagram.jpeg, que era um print de post do Instagram com
     // texto/telefone embutidos na imagem (ruim: informação desatualizável

@@ -116,3 +116,38 @@ O que fazer:
    script e rode de novo com
    `node scripts/gerar-imagens-produtos.mjs --force`.
 5. Me dê um resumo curto do resultado.
+
+---
+
+**Atualização 4**: adicionei a **Torta do Marinheiro** — nova torta
+salgada de sardinha, sabor diferenciado no cardápio.
+
+Contexto:
+- Recheio real (informado pela Milena): 4 latas de sardinha, 1 molho de
+  tomate, 1 tomate, 1 lata de ervilha, 1 lata de milho verde, 1 cenoura
+  ralada e 2 colheres de requeijão/catupiry.
+- Nome, descrição e preço estimado (R$ 45,00, mesma faixa das outras
+  tortas) já estão cadastrados em `src/data/seedFallback.js` e num bloco
+  novo idempotente no final de `supabase/schema.sql` (produto + entrada
+  na galeria) — não precisa mexer nisso, só falta a foto.
+- Adicionei a entrada `torta-marinheiro.jpg` no array `PRODUTOS` do
+  script `scripts/gerar-imagens-produtos.mjs`, já no mesmo estilo visual
+  (quadrada 1:1) e mesmo padrão das outras tortas: fatia cortada e
+  puxada mostrando o recheio, sem texto/logo.
+
+O que fazer:
+1. Rode `node scripts/gerar-imagens-produtos.mjs` — ele vai pular tudo
+   que já existe e gerar só `torta-marinheiro.jpg`.
+2. Abra `public/images/torta-marinheiro.jpg` e confirme visualmente que:
+   - Não tem texto, logo ou marca d'água.
+   - O recheio parece mesmo ter sardinha, molho de tomate, ervilha,
+     milho e cenoura (tom avermelhado/alaranjado, colorido, não uma
+     torta de frango genérica).
+   - Tamanho do arquivo na faixa ~80-400 KB.
+3. Rode `npm run dev` e confira se "Torta do Marinheiro" aparece
+   corretamente na aba Tortas do Cardápio.
+4. Se o resultado não parecer torta de sardinha (às vezes o modelo pode
+   confundir com atum ou outro peixe), ajuste o prompt da entrada
+   `torta-marinheiro.jpg` para reforçar "sardine" e rode de novo com
+   `--force`.
+5. Me dê um resumo curto do resultado.

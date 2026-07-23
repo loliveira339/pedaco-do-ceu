@@ -70,6 +70,16 @@ export const produtosFallback = [
     destaque: false,
   },
   {
+    id: 'torta-marinheiro',
+    categoria_id: 'tortas',
+    nome: 'Torta do Marinheiro',
+    descricao: 'Recheio farto de sardinha desfiada, molho e tomate fresco, ervilha, milho verde, cenoura ralada e um toque cremoso de requeijão. Sabor diferente, cheio de personalidade. Massa dourada e crocante.',
+    preco: 45.0,
+    imagem_url: '/images/torta-marinheiro.jpg',
+    ativo: true,
+    destaque: false,
+  },
+  {
     id: 'pudim-chocolate',
     categoria_id: 'pudins',
     nome: 'Pudim de Chocolate',
@@ -148,6 +158,7 @@ export const galeriaFallback = [
   { id: 14, imagem_url: '/images/mini-pudim-coco.jpg', legenda: 'Mini Pudim de Coco' },
   { id: 15, imagem_url: '/images/mini-pudim-chocolate.jpg', legenda: 'Mini Pudim de Chocolate' },
   { id: 16, imagem_url: '/images/mini-pudim-laranja.jpg', legenda: 'Mini Pudim de Laranja' },
+  { id: 17, imagem_url: '/images/torta-marinheiro.jpg', legenda: 'Torta do Marinheiro' },
 ];
 
 export const depoimentosFallback = [

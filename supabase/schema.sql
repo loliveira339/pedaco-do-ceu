@@ -312,3 +312,18 @@ where not exists (select 1 from galeria where imagem_url = '/images/mini-pudim-c
 insert into galeria (imagem_url, legenda, ordem)
 select '/images/mini-pudim-laranja.jpg', 'Mini Pudim de Laranja', 16
 where not exists (select 1 from galeria where imagem_url = '/images/mini-pudim-laranja.jpg');
+
+-- ============================================================
+-- SEED ADICIONAL — Torta do Marinheiro (torta de sardinha). Pode ser
+-- rodado separadamente a qualquer momento: os "not exists" evitam
+-- duplicar produto/foto, mesmo que o schema.sql inteiro já tenha sido
+-- executado antes.
+-- ============================================================
+insert into produtos (categoria_id, nome, descricao, preco, imagem_url, destaque, ordem)
+select id, 'Torta do Marinheiro', 'Recheio farto de sardinha desfiada, molho e tomate fresco, ervilha, milho verde, cenoura ralada e um toque cremoso de requeijão. Sabor diferente, cheio de personalidade. Massa dourada e crocante.', 45.00, '/images/torta-marinheiro.jpg', false, 6
+from categorias where slug = 'tortas'
+and not exists (select 1 from produtos where nome = 'Torta do Marinheiro');
+
+insert into galeria (imagem_url, legenda, ordem)
+select '/images/torta-marinheiro.jpg', 'Torta do Marinheiro', 17
+where not exists (select 1 from galeria where imagem_url = '/images/torta-marinheiro.jpg');
